@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: '',
+      title: 'web3go-back-system',
       logo: logoImg
     }
   }
