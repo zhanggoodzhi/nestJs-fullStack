@@ -1,5 +1,5 @@
 import { SysConfigModule } from './modules/system/sys-config/sys-config.module';
-import { WebUserModule } from './modules/system/web-user/web-user.module';
+import { WebUserModule } from './modules/website/web-user/web-user.module';
 import { CommonModule } from './modules/common/common.module';
 import { LoginModule } from './modules/login/login.module';
 import { SharedModule } from './shared/shared.module';
@@ -51,6 +51,7 @@ const aliasProviders = createAliasProviders();
     UserModule,
     DictModule,
     SysConfigModule,
+    WebUserModule,
     NoticeModule,
     PostModule,
     DeptModule,

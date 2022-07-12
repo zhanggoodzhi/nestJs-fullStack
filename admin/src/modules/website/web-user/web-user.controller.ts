@@ -18,14 +18,14 @@ import { ReqAddConfigDto, ReqConfigListDto } from './dto/req-web-user.dto';
 import { WebUser } from './entities/web-user.entity';
 import { WebUserService } from './web-user.service';
 
-@ApiTags('参数设置')
-@Controller('system/config')
+@ApiTags('web-user')
+@Controller('website/webUser')
 export class WebUserController {
     constructor(
         private readonly webUserService: WebUserService,
     ) { }
 
-    /* 新增参数 */
+    /* 新增 */
     @RepeatSubmit()
     @Post()
     @Log({
@@ -38,7 +38,7 @@ export class WebUserController {
         await this.webUserService.addOrUpdate(reqAddConfigDto)
     }
 
-    /* 分页查询参数列表 */
+    /* 分页查询列表 */
     @Get('list')
     @RequiresPermissions('system:config:query')
     @ApiPaginatedResponse(WebUser)
@@ -46,34 +46,17 @@ export class WebUserController {
         return await this.webUserService.list(reqConfigListDto)
     }
 
-    /* 清除缓存 */
-    @Delete('refreshCache')
-    @Log({
-        title: '参数设置',
-        businessType: BusinessTypeEnum.clean
-    })
-    async refreshCache() {
-        await this.webUserService.refreshCache()
-    }
 
-    /* 通过 configKey 查询参数(缓存查询) */
-    @Get('/configKey/:configKey')
-    @ApiDataResponse(typeEnum.string, WebUser)
-    async oneByconfigKey(@Param('configKey') configKey: string) {
-        const webUser = await this.webUserService.lazyFindByConfigKey(configKey)
-        return DataObj.create(webUser)
-    }
-
-    /* 通过id查询参数 */
-    @Get(":configId")
+    /* 通过id查询 */
+    @Get(":id")
     @RequiresPermissions('system:config:query')
     @ApiDataResponse(typeEnum.object, WebUser)
-    async one(@Param('configId') configId: number) {
-        const webUser = await this.webUserService.findById(configId)
+    async one(@Param('id') id: number) {
+        const webUser = await this.webUserService.findById(id)
         return DataObj.create(webUser)
     }
 
-    /* 修改参数 */
+    /* 修改 */
     @RepeatSubmit()
     @Put()
     @Log({
@@ -86,14 +69,14 @@ export class WebUserController {
         await this.webUserService.addOrUpdate(webUser)
     }
 
-    /* 删除参数 */
-    @Delete(":configIds")
+    /* 删除 */
+    @Delete(":ids")
     @Log({
         title: '参数设置',
         businessType: BusinessTypeEnum.delete
     })
     @RequiresPermissions('system:config:remove')
-    async delete(@Param('configIds') configIds: String) {
-        await this.webUserService.delete(configIds.split(','))
+    async delete(@Param('ids') ids: String) {
+        await this.webUserService.delete(ids.split(','))
     }
 }
