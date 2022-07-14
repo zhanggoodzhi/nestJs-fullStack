@@ -4,9 +4,9 @@ import { Excel } from "src/modules/common/excel/excel.decorator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({
-    name: 'web_user'
+    name: 'web_news'
 })
-export class WebUser extends BaseEntity {
+export class WebNews extends BaseEntity {
     /* 参数主键 */
     @PrimaryGeneratedColumn({
         name: 'id',
@@ -26,22 +26,13 @@ export class WebUser extends BaseEntity {
     name: string
 
     @Column({
-        name: 'introduction',
-        length: 100,
-        default: '',
-        comment: 'introduction'
-    })
-    @IsString()
-    introduction: string
-
-    @Column({
-        name: 'article',
+        name: 'link',
         length: 1000,
         default: '',
-        comment: 'article'
+        comment: 'link'
     })
     @IsString()
-    article: string
+    link: string
 
     @Column({
         name: 'image',

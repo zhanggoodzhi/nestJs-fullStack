@@ -1,52 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="参数名称" prop="configName">
-        <el-input
-          v-model="queryParams.configName"
-          placeholder="请输入参数名称"
-          clearable
-          style="width: 240px"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="参数键名" prop="configKey">
-        <el-input
-          v-model="queryParams.configKey"
-          placeholder="请输入参数键名"
-          clearable
-          style="width: 240px"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="系统内置" prop="configType">
-        <el-select v-model="queryParams.configType" placeholder="系统内置" clearable>
-          <el-option
-            v-for="dict in dict.type.sys_yes_no"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="创建时间">
-        <el-date-picker
-          v-model="dateRange"
-          style="width: 240px"
-          value-format="yyyy-MM-dd"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-row :gutter="10" class="mb8">
+    <el-row :gutter="10" class="mb8" type="flex" justify="end">
       <el-col :span="1.5">
         <el-button
           type="primary"
@@ -54,140 +8,120 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:config:add']"
-        >新增</el-button>
+          >create</el-button
+        >
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="el-icon-edit"
-          size="mini"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['system:config:edit']"
-        >修改</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['system:config:remove']"
-        >删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['system:config:export']"
-        >导出</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-refresh"
-          size="mini"
-          @click="handleRefreshCache"
-          v-hasPermi="['system:config:remove']"
-        >刷新缓存</el-button>
-      </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="参数主键" align="center" prop="configId" />
-      <el-table-column label="参数名称" align="center" prop="configName" :show-overflow-tooltip="true" />
-      <el-table-column label="参数键名" align="center" prop="configKey" :show-overflow-tooltip="true" />
-      <el-table-column label="参数键值" align="center" prop="configValue" />
-      <el-table-column label="系统内置" align="center" prop="configType">
+    <el-table v-loading="loading" :data="tableData">
+      <el-table-column
+        label="name"
+        align="center"
+        prop="name"
+        :show-overflow-tooltip="true"
+      />
+     
+      <el-table-column
+        label="link"
+        align="center"
+        prop="link"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column label="image" align="center" prop="image">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_yes_no" :value="scope.row.configType"/>
+          <img
+            class="row-img"
+            :src="$utils.getImgPath(scope.row.image)"
+            alt=""
+          />
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="remark" :show-overflow-tooltip="true" />
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.createTime) }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        label="operation"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:config:edit']"
-          >修改</el-button>
+            >edit</el-button
+          >
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:config:remove']"
-          >删除</el-button>
+            >remove</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
 
     <pagination
-      v-show="total>0"
+      v-show="total > 0"
       :total="total"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
 
-    <!-- 添加或修改参数配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="参数名称" prop="configName">
-          <el-input v-model="form.configName" placeholder="请输入参数名称" />
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+        <el-form-item label="name" prop="name">
+          <el-input v-model="form.name" />
         </el-form-item>
-        <el-form-item label="参数键名" prop="configKey">
-          <el-input v-model="form.configKey" placeholder="请输入参数键名" />
+      
+        <el-form-item label="link" prop="link">
+          <el-input v-model="form.link" type="textarea" />
         </el-form-item>
-        <el-form-item label="参数键值" prop="configValue">
-          <el-input v-model="form.configValue" placeholder="请输入参数键值" />
-        </el-form-item>
-        <el-form-item label="系统内置" prop="configType">
-          <el-radio-group v-model="form.configType">
-            <el-radio
-              v-for="dict in dict.type.sys_yes_no"
-              :key="dict.value"
-              :label="dict.value"
-            >{{dict.label}}</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+        <el-form-item label="image" prop="image">
+          <el-upload
+            class="avatar-uploader"
+            :action="api + '/common/upload'"
+            :headers="uploadHeaders"
+            :file-list="fileList"
+            accept=".png, .jpg"
+            :limit="1"
+            list-type="picture"
+            :on-success="handleAvatarSuccess"
+            :on-remove="handleRemove"
+            :before-upload="beforeAvatarUpload"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">
+              只能上传jpg/png文件，且不超过5MB
+            </div>
+          </el-upload>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
+        <el-button type="primary" @click="submitForm">ok</el-button>
+        <el-button @click="cancel">cancel</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { listConfig, getConfig, delConfig, addConfig, updateConfig, refreshCache } from "@/api/system/config";
+import { getToken } from "@/utils/auth";
+
+import {
+  listNews,
+  getNews,
+  delNews,
+  addNews,
+  updateNews,
+} from "@/api/website/news";
 
 export default {
-  name: "Config",
-  dicts: ['sys_yes_no'],
   data() {
     return {
+      api: process.env.VUE_APP_BASE_API,
+
+      uploadHeaders: { Authorization: "Bearer " + getToken() },
       // 遮罩层
       loading: true,
       // 选中数组
@@ -201,50 +135,57 @@ export default {
       // 总条数
       total: 0,
       // 参数表格数据
-      configList: [],
+      tableData: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
       open: false,
+      fileList: [],
       // 日期范围
       dateRange: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        configName: undefined,
-        configKey: undefined,
-        configType: undefined
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
-        configName: [
-          { required: true, message: "参数名称不能为空", trigger: "blur" }
-        ],
-        configKey: [
-          { required: true, message: "参数键名不能为空", trigger: "blur" }
-        ],
-        configValue: [
-          { required: true, message: "参数键值不能为空", trigger: "blur" }
-        ]
-      }
+        name: [{ required: true, trigger: "blur" }],
+        link: [{ required: true, trigger: "blur" }],
+        image: [{ required: true, trigger: "blur" }],
+      },
     };
   },
   created() {
     this.getList();
   },
   methods: {
+    handleAvatarSuccess(res, file, fileList) {
+      this.$set(this.form, "image", res.fileName);
+      this.fileList = fileList;
+
+      this.$refs.form.clearValidate("image");
+    },
+    handleRemove(file, fileList) {
+      this.fileList = fileList;
+    },
+    beforeAvatarUpload(file) {
+      const isLt2M = file.size / 1024 / 1024 < 5;
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 5MB!");
+      }
+      return isLt2M;
+    },
     /** 查询参数列表 */
     getList() {
       this.loading = true;
-      listConfig(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-          this.configList = response.rows;
-          this.total = response.total;
-          this.loading = false;
-        }
-      );
+      listNews().then((response) => {
+        this.tableData = response.rows;
+        this.total = response.total;
+        this.loading = false;
+      });
     },
     // 取消按钮
     cancel() {
@@ -254,61 +195,52 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-        configId: undefined,
-        configName: undefined,
-        configKey: undefined,
-        configValue: undefined,
-        configType: "Y",
-        remark: undefined
+        id: undefined,
+        name: undefined,
+        link: undefined,
+        image: null,
       };
+      this.fileList = [];
       this.resetForm("form");
-    },
-    /** 搜索按钮操作 */
-    handleQuery() {
-      this.queryParams.pageNum = 1;
-      this.getList();
-    },
-    /** 重置按钮操作 */
-    resetQuery() {
-      this.dateRange = [];
-      this.resetForm("queryForm");
-      this.handleQuery();
     },
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加参数";
-    },
-    // 多选框选中数据
-    handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.configId)
-      this.single = selection.length!=1
-      this.multiple = !selection.length
+      this.title = "add";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const configId = row.configId || this.ids
-      getConfig(configId).then(response => {
+      const id = row.id || this.ids;
+      getNews(id).then((response) => {
         this.form = response.data;
+        this.fileList = [
+          {
+            name: row.image,
+            url: this.$utils.getImgPath(row.image),
+            response: {
+              fileName: row.image,
+            },
+          },
+        ];
         this.open = true;
-        this.title = "修改参数";
+        this.title = "update";
       });
     },
     /** 提交按钮 */
-    submitForm: function() {
-      this.$refs["form"].validate(valid => {
+    submitForm: function () {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
-          if (this.form.configId != undefined) {
-            updateConfig(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
+          if (this.form.id != undefined) {
+            updateNews(this.form).then((response) => {
+              this.$modal.msgSuccess("update success");
               this.open = false;
               this.getList();
             });
           } else {
-            addConfig(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
+            addNews(this.form).then((response) => {
+              this.$modal.msgSuccess("add success");
               this.open = false;
               this.getList();
             });
@@ -318,26 +250,23 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const configIds = row.configId || this.ids;
-      this.$modal.confirm('是否确认删除参数编号为"' + configIds + '"的数据项？').then(function() {
-          return delConfig(configIds);
-        }).then(() => {
+      const ids = row.id || this.ids;
+      this.$modal
+        .confirm("Are you sure to remove this row?")
+        .then(function () {
+          return delNews(ids);
+        })
+        .then(() => {
           this.getList();
-          this.$modal.msgSuccess("删除成功");
-        }).catch(() => {});
+          this.$modal.msgSuccess("remove success");
+        })
+        .catch(() => {});
     },
-    /** 导出按钮操作 */
-    handleExport() {
-      this.download('system/config/export', {
-        ...this.queryParams
-      }, `config_${new Date().getTime()}.xlsx`)
-    },
-    /** 刷新缓存按钮操作 */
-    handleRefreshCache() {
-      refreshCache().then(() => {
-        this.$modal.msgSuccess("刷新成功");
-      });
-    }
-  }
+  },
 };
 </script>
+<style>
+.row-img {
+  height: 50px;
+}
+</style>
