@@ -1,46 +1,28 @@
 <template>
   <div class="app-container">
-    <el-row :gutter="10" class="mb8" type="flex" justify="end">
-      <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="el-icon-plus"
-          size="mini"
-          @click="handleAdd"
-          >create</el-button
-        >
-      </el-col>
-    </el-row>
-
     <el-table v-loading="loading" :data="tableData">
       <el-table-column
-        label="name"
+        label="userCount"
         align="center"
-        prop="name"
+        prop="userCount"
         :show-overflow-tooltip="true"
       />
       <el-table-column
-        label="introduction"
+        label="PredictionCount"
         align="center"
-        prop="introduction"
+        prop="PredictionCount"
+        :show-overflow-tooltip="true"
+      /><el-table-column
+        label="AlertCount"
+        align="center"
+        prop="AlertCount"
+        :show-overflow-tooltip="true"
+      /><el-table-column
+        label="DashboardCount"
+        align="center"
+        prop="DashboardCount"
         :show-overflow-tooltip="true"
       />
-      <el-table-column
-        label="article"
-        align="center"
-        prop="article"
-        :show-overflow-tooltip="true"
-      />
-      <el-table-column label="image" align="center" prop="image">
-        <template slot-scope="scope">
-          <img
-            class="row-img"
-            :src="$utils.getImgPath(scope.row.image)"
-            alt=""
-          />
-        </template>
-      </el-table-column>
       <el-table-column
         label="operation"
         align="center"
@@ -53,13 +35,6 @@
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             >edit</el-button
-          >
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            >remove</el-button
           >
         </template>
       </el-table-column>
@@ -74,34 +49,18 @@
     />
 
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="name" prop="name">
-          <el-input v-model="form.name" />
+      <el-form ref="form" :model="form" :rules="rules" label-width="140px">
+        <el-form-item label="userCount" prop="userCount">
+          <el-input v-model="form.userCount" />
         </el-form-item>
-        <el-form-item label="introduction" prop="introduction">
-          <el-input v-model="form.introduction" />
+        <el-form-item label="PredictionCount" prop="PredictionCount">
+          <el-input v-model="form.PredictionCount" />
         </el-form-item>
-        <el-form-item label="article" prop="article">
-          <el-input v-model="form.article" type="textarea" />
+        <el-form-item label="AlertCount" prop="AlertCount">
+          <el-input v-model="form.AlertCount" />
         </el-form-item>
-        <el-form-item label="image" prop="image">
-          <el-upload
-            class="avatar-uploader"
-            :action="api + '/common/upload'"
-            :headers="uploadHeaders"
-            :file-list="fileList"
-            accept=".png, .jpg"
-            :limit="1"
-            list-type="picture"
-            :on-success="handleAvatarSuccess"
-            :on-remove="handleRemove"
-            :before-upload="beforeAvatarUpload"
-          >
-            <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">
-              只能上传jpg/png文件，且不超过5MB
-            </div>
-          </el-upload>
+        <el-form-item label="DashboardCount" prop="DashboardCount">
+          <el-input v-model="form.DashboardCount" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -116,12 +75,12 @@
 import { getToken } from "@/utils/auth";
 
 import {
-  listUser,
-  getUser,
-  delUser,
-  addUser,
-  updateUser,
-} from "@/api/website/user";
+  listConfig,
+  getConfig,
+  delConfig,
+  addConfig,
+  updateConfig,
+} from "@/api/website/numberConfig";
 
 export default {
   data() {
@@ -189,7 +148,7 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true;
-      listUser().then((response) => {
+      listConfig().then((response) => {
         this.tableData = response.rows;
         this.total = response.total;
         this.loading = false;
@@ -222,7 +181,7 @@ export default {
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids;
-      getUser(id).then((response) => {
+      getConfig(id).then((response) => {
         this.form = response.data;
         this.fileList = [
           {
@@ -242,34 +201,14 @@ export default {
       this.$refs["form"].validate((valid) => {
         if (valid) {
           if (this.form.id != undefined) {
-            updateUser(this.form).then((response) => {
+            updateConfig(this.form).then((response) => {
               this.$modal.msgSuccess("update success");
-              this.open = false;
-              this.getList();
-            });
-          } else {
-            addUser(this.form).then((response) => {
-              this.$modal.msgSuccess("add success");
               this.open = false;
               this.getList();
             });
           }
         }
       });
-    },
-    /** 删除按钮操作 */
-    handleDelete(row) {
-      const ids = row.id || this.ids;
-      this.$modal
-        .confirm("Are you sure to remove this row?")
-        .then(function () {
-          return delUser(ids);
-        })
-        .then(() => {
-          this.getList();
-          this.$modal.msgSuccess("remove success");
-        })
-        .catch(() => {});
     },
   },
 };

@@ -389,5 +389,5 @@ export function isNumberStr(str) {
 }
 
 export function getImgPath(str) {
-    return process.env.VUE_APP_BASE_API + str;
+    return process.env.VUE_APP_IMG_PREFIX + str;
 }

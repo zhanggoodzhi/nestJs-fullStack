@@ -30,9 +30,17 @@ export let storage = multer.diskStorage({
     // 配置上传文件名
     filename: (req, file, cd) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        let suffix = file.originalname;
+        if (file.originalname === 'blob') {
+            if (file.mimetype === 'image/jpeg') {
+                suffix = 'blob.jpg';
+            } else if (file.mimetype === 'image/png') {
+                suffix = 'blob.png';
+            }
+        }
         // 挂载文件存储的路径
-        req.query.fileName = req.query.fileName + '/' + uniqueSuffix + '-' + file.originalname
-        cd(null, uniqueSuffix + '-' + file.originalname)
+        req.query.fileName = req.query.fileName + '/' + uniqueSuffix + '-' + suffix
+        cd(null, uniqueSuffix + '-' + suffix)
     }
 })
 

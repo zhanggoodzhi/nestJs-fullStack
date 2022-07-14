@@ -177,6 +177,7 @@ export default {
       this.$refs.form.clearValidate("image");
     },
     handleRemove(file, fileList) {
+      this.$set(this.form, "image", null);
       this.fileList = fileList;
     },
     beforeAvatarUpload(file) {

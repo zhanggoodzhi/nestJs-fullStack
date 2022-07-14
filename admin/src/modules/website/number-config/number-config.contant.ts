@@ -1,0 +1,1 @@
+export const SYSCONFIG_KEY = "website:user"
