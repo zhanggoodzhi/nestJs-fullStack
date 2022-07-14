@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 12/07/2022 14:55:55
+ Date: 14/07/2022 11:25:22
 */
 
 SET NAMES utf8;
@@ -68,7 +68,7 @@ CREATE TABLE `dept`  (
 -- ----------------------------
 -- Records of dept
 -- ----------------------------
-INSERT INTO `dept` VALUES ('2021-12-29 16:36:06.320221', '2022-01-06 13:39:00.000000', '', 'admin', '', 1, '槑槑总部', 1, '槑槑', '13006133172', '87789771@qq.com', '0', '0', '1.', NULL);
+INSERT INTO `dept` VALUES ('2021-12-29 16:36:06.320221', '2022-07-12 16:38:48.000000', '', 'admin', '', 1, 'web3go', 1, '', '', '', '0', '0', '1.', NULL);
 
 -- ----------------------------
 -- Table structure for dict_data
@@ -219,13 +219,18 @@ CREATE TABLE `logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '提示消息',
   `login_time` datetime(0) NOT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of logininfor
 -- ----------------------------
 INSERT INTO `logininfor` VALUES (1, 'admin', '127.0.0.1', '内网IP', 'Chrome103', 'Windows10', '0', '登录成功', '2022-07-12 10:10:42');
 INSERT INTO `logininfor` VALUES (2, 'admin', '127.0.0.1', '内网IP', 'Chrome103', 'Windows10', '0', '登录成功', '2022-07-12 10:26:18');
+INSERT INTO `logininfor` VALUES (3, 'admin', '127.0.0.1', '内网IP', 'Chrome103', 'Windows10', '0', '登录成功', '2022-07-13 11:04:35');
+INSERT INTO `logininfor` VALUES (4, 'admin', '127.0.0.1', '内网IP', 'Chrome103', 'Windows10', '1', '用户名或密码错误', '2022-07-14 10:37:35');
+INSERT INTO `logininfor` VALUES (5, 'admin', '127.0.0.1', '内网IP', 'Chrome103', 'Windows10', '1', '用户名或密码错误', '2022-07-14 10:37:53');
+INSERT INTO `logininfor` VALUES (6, 'admin', '127.0.0.1', '内网IP', 'Chrome103', 'Windows10', '1', '用户名或密码错误', '2022-07-14 10:38:06');
+INSERT INTO `logininfor` VALUES (7, 'admin', '127.0.0.1', '内网IP', 'Chrome103', 'Windows10', '0', '登录成功', '2022-07-14 10:38:55');
 
 -- ----------------------------
 -- Table structure for menu
@@ -332,9 +337,10 @@ INSERT INTO `menu` VALUES ('2021-12-29 15:36:36.070927', '2022-07-12 11:16:46.00
 INSERT INTO `menu` VALUES ('2021-12-29 15:36:47.605200', '2022-07-12 11:16:46.000000', 'admin', 'admin', '', 71, '任务删除', 4, '', NULL, NULL, 1, 0, 'F', '0', '0', 'monitor:job:remove', '#', '2.46.71.', 46);
 INSERT INTO `menu` VALUES ('2021-12-29 15:36:57.920063', '2022-07-12 11:16:46.000000', 'admin', 'admin', '', 72, '状态修改', 5, '', NULL, NULL, 1, 0, 'F', '0', '0', 'monitor:job:changeStatus', '#', '2.46.72.', 46);
 INSERT INTO `menu` VALUES ('2021-12-29 15:37:31.201464', '2022-07-12 11:16:46.000000', 'admin', 'admin', '', 73, '任务导出', 7, '', NULL, NULL, 1, 0, 'F', '0', '0', 'monitor:job:export', '#', '2.46.73.', 46);
-INSERT INTO `menu` VALUES ('2022-07-12 10:30:29.218685', '2022-07-12 11:15:24.000000', 'admin', 'admin', '', 74, 'website', 1, 'website', NULL, NULL, 1, 0, 'M', '0', '0', NULL, 'tab', '74.', NULL);
-INSERT INTO `menu` VALUES ('2022-07-12 11:10:55.530741', '2022-07-12 11:15:24.000000', 'admin', 'admin', '', 75, 'user', 1, 'userManage', 'website/userManage/index', NULL, 1, 1, 'C', '0', '0', 'website:userManage', '#', '74.75.', 74);
-INSERT INTO `menu` VALUES ('2022-07-12 11:14:15.603637', '2022-07-12 11:15:24.000000', 'admin', 'admin', '', 76, 'news', 2, 'newsManage', 'website/newsManage/index', NULL, 1, 1, 'C', '0', '0', 'website:newsManage', '#', '74.76.', 74);
+INSERT INTO `menu` VALUES ('2022-07-12 10:30:29.218685', '2022-07-12 17:05:44.000000', 'admin', 'admin', '', 74, 'website', 0, 'website', NULL, NULL, 1, 0, 'M', '0', '0', NULL, 'tab', '74.', NULL);
+INSERT INTO `menu` VALUES ('2022-07-12 11:10:55.530741', '2022-07-12 17:05:44.000000', 'admin', 'admin', '', 75, 'user', 1, 'user', 'website/user/index', NULL, 1, 1, 'C', '0', '0', 'website:user', '#', '74.75.', 74);
+INSERT INTO `menu` VALUES ('2022-07-12 11:14:15.603637', '2022-07-12 17:05:44.000000', 'admin', 'admin', '', 76, 'news', 2, 'news', 'website/news/index', NULL, 1, 1, 'C', '0', '0', 'website:news', '#', '74.76.', 74);
+INSERT INTO `menu` VALUES ('2022-07-14 09:51:22.490580', '2022-07-14 09:51:22.000000', 'admin', 'admin', '', 77, 'numberConfig', 3, 'numberConfig', 'website/numberConfig/index', NULL, 1, 1, 'C', '0', '0', 'website:numberConfig', '#', '74.77.', 74);
 
 -- ----------------------------
 -- Table structure for notice
@@ -359,6 +365,29 @@ CREATE TABLE `notice`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for number_config
+-- ----------------------------
+DROP TABLE IF EXISTS `number_config`;
+CREATE TABLE `number_config`  (
+  `create_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
+  `update_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
+  `create_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创建人',
+  `update_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '更新人',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
+  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `userCount` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'userCount',
+  `PredictionCount` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'PredictionCount',
+  `AlertCount` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'AlertCount',
+  `DashboardCount` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'DashboardCount',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of number_config
+-- ----------------------------
+INSERT INTO `number_config` VALUES ('2022-07-13 15:48:44.257053', '2022-07-14 10:10:26.000000', 'admin', 'admin', '', 6, '1000', '23434', '30325', '344');
+
+-- ----------------------------
 -- Table structure for oper_log
 -- ----------------------------
 DROP TABLE IF EXISTS `oper_log`;
@@ -380,13 +409,41 @@ CREATE TABLE `oper_log`  (
   `errorMsg` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '返回参数',
   `oper_time` datetime(0) NOT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of oper_log
 -- ----------------------------
 INSERT INTO `oper_log` VALUES (1, '参数设置', '9', 'SysConfigController.refreshCache()', 'DELETE', '0', 'admin', '槑槑总部', '/system/config/refreshCache', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-12 14:25:02');
 INSERT INTO `oper_log` VALUES (2, '参数设置', '6', 'SysConfigController.export()', 'POST', '0', 'admin', '槑槑总部', '/system/config/export', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"pageNum\":\"1\",\"pageSize\":\"10\"}}', '{\"options\":{\"length\":15196},\"stream\":{\"_readableState\":{\"objectMode\":false,\"highWaterMark\":16384,\"buffer\":{\"head\":null,\"tail\":null,\"length\":0},\"length\":0,\"pipes\":[],\"flowing\":false,\"ended\":true,\"endEmitted\":true,\"reading\":false,\"sync\":true,\"needReadable\":false,\"emittedReadable\":false,\"readableListening\":false,\"resumeScheduled\":false,\"errorEmitted\":false,\"emitClose\":true,\"autoDestroy\":true,\"destroyed\":true,\"errored\":null,\"closed\":true,\"closeEmitted\":true,\"defaultEncoding\":\"utf8\",\"awaitDrainWriters\":null,\"multiAwaitDrain\":false,\"readingMore\":false,\"dataEmitted\":true,\"decoder\":null,\"encoding\":null},\"_events\":{},\"_eventsCount\":0}}', 0, '', '2022-07-12 14:27:46');
+INSERT INTO `oper_log` VALUES (3, '参数设置', '2', 'WebUserController.add()', 'POST', '0', 'admin', '槑槑总部', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"name\":\"1\",\"introduction\":\"2\",\"article\":\"3\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-12 16:36:02');
+INSERT INTO `oper_log` VALUES (4, '参数设置', '2', 'WebUserController.add()', 'POST', '0', 'admin', '槑槑总部', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-12T08:36:02.228Z\",\"updateTime\":\"2022-07-12T08:36:02.228Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":1,\"name\":\"1\",\"introduction\":\"2\",\"article\":\"sdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgsssssssssssssssdgssssssssssssss\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-12 16:36:47');
+INSERT INTO `oper_log` VALUES (5, '部门管理', '3', 'DeptController.update()', 'PUT', '0', 'admin', '槑槑总部', '/system/dept', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2021-12-29T08:36:06.320Z\",\"deptId\":1,\"deptName\":\"web3go\",\"orderNum\":1,\"leader\":\"\",\"phone\":\"\",\"email\":\"\",\"status\":\"0\",\"parentId\":\"0\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-12 16:38:48');
+INSERT INTO `oper_log` VALUES (6, '参数设置', '2', 'WebUserController.add()', 'POST', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-12T08:36:47.814Z\",\"updateTime\":\"2022-07-12T08:36:47.814Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":2,\"name\":\"1\",\"introduction\":\"2\",\"article\":\"sdgsssssss ssssssssd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgsd gsssssss ssssssssd gsssssssss ssssssdgsss ssssssssss ssdgs\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-12 16:44:33');
+INSERT INTO `oper_log` VALUES (7, '参数设置', '4', 'WebUserController.delete()', 'DELETE', '0', 'admin', 'web3go', '/website/webUser/2', '127.0.0.1', '内网IP', '{\"params\":{\"ids\":\"2\"},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-12 16:44:37');
+INSERT INTO `oper_log` VALUES (8, '参数设置', '6', 'SysConfigController.export()', 'POST', '0', 'admin', 'web3go', '/system/config/export', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"pageNum\":\"1\",\"pageSize\":\"10\"}}', '{\"options\":{\"length\":15196},\"stream\":{\"_readableState\":{\"objectMode\":false,\"highWaterMark\":16384,\"buffer\":{\"head\":null,\"tail\":null,\"length\":0},\"length\":0,\"pipes\":[],\"flowing\":false,\"ended\":true,\"endEmitted\":true,\"reading\":false,\"sync\":true,\"needReadable\":false,\"emittedReadable\":false,\"readableListening\":false,\"resumeScheduled\":false,\"errorEmitted\":false,\"emitClose\":true,\"autoDestroy\":true,\"destroyed\":true,\"errored\":null,\"closed\":true,\"closeEmitted\":true,\"defaultEncoding\":\"utf8\",\"awaitDrainWriters\":null,\"multiAwaitDrain\":false,\"readingMore\":false,\"dataEmitted\":true,\"decoder\":null,\"encoding\":null},\"_events\":{},\"_eventsCount\":0}}', 0, '', '2022-07-13 14:21:27');
+INSERT INTO `oper_log` VALUES (9, 'websiteUser', '2', 'WebUserController.add()', 'POST', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"name\":\"1\",\"introduction\":\"2\",\"article\":\"3\",\"image\":\"/dev-api/upload/2022-07-13/1657697292062-267315285-31b34e4db984f376fadf85a95b3f9b5.jpg\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:28:17');
+INSERT INTO `oper_log` VALUES (10, 'websiteUser', '4', 'WebUserController.delete()', 'DELETE', '0', 'admin', 'web3go', '/website/webUser/2', '127.0.0.1', '内网IP', '{\"params\":{\"ids\":\"2\"},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:31:13');
+INSERT INTO `oper_log` VALUES (11, 'websiteUser', '2', 'WebUserController.add()', 'POST', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"name\":\"1\",\"introduction\":\"2\",\"article\":\"3\",\"image\":\"/upload/2022-07-13/1657697478933-433026093-default.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:31:20');
+INSERT INTO `oper_log` VALUES (12, 'websiteUser', '2', 'WebUserController.add()', 'POST', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-13T07:31:20.604Z\",\"updateTime\":\"2022-07-13T07:31:20.604Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":3,\"name\":\"1\",\"introduction\":\"246\",\"article\":\"3567457\",\"image\":\"/upload/2022-07-13/1657698396048-59347371_logo.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:46:38');
+INSERT INTO `oper_log` VALUES (13, 'websiteUser', '4', 'WebUserController.delete()', 'DELETE', '0', 'admin', 'web3go', '/website/webUser/4', '127.0.0.1', '内网IP', '{\"params\":{\"ids\":\"4\"},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:47:14');
+INSERT INTO `oper_log` VALUES (14, 'websiteUser', '4', 'WebUserController.delete()', 'DELETE', '0', 'admin', 'web3go', '/website/webUser/3', '127.0.0.1', '内网IP', '{\"params\":{\"ids\":\"3\"},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:47:15');
+INSERT INTO `oper_log` VALUES (15, 'websiteUser', '2', 'WebUserController.add()', 'POST', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"name\":\"1\",\"introduction\":\"2\",\"article\":\"3\",\"image\":\"/upload/2022-07-13/1657698443429-6808540_default.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:47:24');
+INSERT INTO `oper_log` VALUES (16, 'websiteUser', '4', 'WebUserController.delete()', 'DELETE', '0', 'admin', 'web3go', '/website/webUser/5', '127.0.0.1', '内网IP', '{\"params\":{\"ids\":\"5\"},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:48:38');
+INSERT INTO `oper_log` VALUES (17, 'websiteUser', '2', 'WebUserController.add()', 'POST', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"name\":\"1\",\"introduction\":\"2\",\"article\":\"3\",\"image\":\"/upload/2022-07-13/1657698523121-142393804-default.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:48:44');
+INSERT INTO `oper_log` VALUES (18, 'websiteUser', '2', 'WebUserController.add()', 'POST', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-13T07:48:44.257Z\",\"updateTime\":\"2022-07-13T07:48:44.257Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":6,\"name\":\"1\",\"introduction\":\"2\",\"article\":\"366\",\"image\":\"/upload/2022-07-13/1657698534683-670166226-logo.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:48:56');
+INSERT INTO `oper_log` VALUES (19, 'websiteUser', '4', 'WebUserController.delete()', 'DELETE', '0', 'admin', 'web3go', '/website/webUser/7', '127.0.0.1', '内网IP', '{\"params\":{\"ids\":\"7\"},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:49:48');
+INSERT INTO `oper_log` VALUES (20, 'websiteUser', '2', 'WebUserController.add()', 'POST', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-13T07:48:44.257Z\",\"updateTime\":\"2022-07-13T07:48:44.257Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":6,\"name\":\"1\",\"introduction\":\"2\",\"article\":\"38\",\"image\":\"/upload/2022-07-13/1657698523121-142393804-default.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:49:58');
+INSERT INTO `oper_log` VALUES (21, 'websiteUser', '4', 'WebUserController.delete()', 'DELETE', '0', 'admin', 'web3go', '/website/webUser/8', '127.0.0.1', '内网IP', '{\"params\":{\"ids\":\"8\"},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:50:16');
+INSERT INTO `oper_log` VALUES (22, '参数设置', '2', 'SysConfigController.add()', 'POST', '0', 'admin', 'web3go', '/system/config', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"configName\":\"1\",\"configKey\":\"1\",\"configValue\":\"1\",\"configType\":\"Y\",\"remark\":\"55\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:50:32');
+INSERT INTO `oper_log` VALUES (23, '参数设置', '3', 'SysConfigController.updata()', 'PUT', '0', 'admin', 'web3go', '/system/config', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-13T07:50:32.444Z\",\"updateTime\":\"2022-07-13T07:50:32.444Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"55\",\"configId\":2,\"configName\":\"1\",\"configKey\":\"17\",\"configValue\":\"1\",\"configType\":\"Y\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:50:45');
+INSERT INTO `oper_log` VALUES (24, '参数设置', '4', 'SysConfigController.delete()', 'DELETE', '0', 'admin', 'web3go', '/system/config/2', '127.0.0.1', '内网IP', '{\"params\":{\"configIds\":\"2\"},\"query\":{},\"body\":{}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:51:27');
+INSERT INTO `oper_log` VALUES (25, 'websiteUser', '3', 'WebUserController.updata()', 'PUT', '0', 'admin', 'web3go', '/website/webUser', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-13T07:48:44.257Z\",\"updateTime\":\"2022-07-13T07:48:44.257Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":6,\"name\":\"1\",\"introduction\":\"2\",\"article\":\"30\",\"image\":\"/upload/2022-07-13/1657698523121-142393804-default.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 15:51:56');
+INSERT INTO `oper_log` VALUES (26, 'websiteUser', '2', 'WebNewsController.add()', 'POST', '0', 'admin', 'web3go', '/website/webNews', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"name\":\"1\",\"link\":\"2\",\"image\":\"/upload/2022-07-13/1657700910959-321554153-logo.png\"}}', '{\"code\":400,\"msg\":[\"article must be a string\"]}', 1, 'article must be a string', '2022-07-13 16:28:32');
+INSERT INTO `oper_log` VALUES (27, 'websiteUser', '2', 'WebNewsController.add()', 'POST', '0', 'admin', 'web3go', '/website/webNews', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"name\":\"1\",\"link\":\"23\",\"image\":\"/upload/2022-07-13/1657700959441-357190179-logo.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-13 16:29:19');
+INSERT INTO `oper_log` VALUES (28, 'websiteUser', '3', 'WebNewsController.updata()', 'PUT', '0', 'admin', 'web3go', '/website/webNews', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-13T08:29:19.818Z\",\"updateTime\":\"2022-07-13T08:29:19.818Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":9,\"name\":\"1\",\"link\":\"23\",\"image\":\"/upload/2022-07-13/1657700959441-357190179-logo.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-14 09:42:54');
+INSERT INTO `oper_log` VALUES (29, 'websiteUser', '3', 'WebNewsController.updata()', 'PUT', '0', 'admin', 'web3go', '/website/webNews', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-13T08:29:19.818Z\",\"updateTime\":\"2022-07-13T08:29:19.818Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":9,\"name\":\"1\",\"link\":\"23\",\"image\":\"/upload/2022-07-13/1657700959441-357190179-logo.png\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-14 09:43:02');
+INSERT INTO `oper_log` VALUES (30, 'numberConfig', '3', 'NumberConfigController.updata()', 'PUT', '0', 'admin', 'web3go', '/website/numberConfig', '127.0.0.1', '内网IP', '{\"params\":{},\"query\":{},\"body\":{\"createTime\":\"2022-07-13T07:48:44.257Z\",\"updateTime\":\"2022-07-14T02:02:01.513Z\",\"createBy\":\"admin\",\"updateBy\":\"admin\",\"remark\":\"\",\"id\":6,\"userCount\":\"1000\",\"PredictionCount\":\"23434\",\"AlertCount\":\"30325\",\"DashboardCount\":\"344\"}}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, '', '2022-07-14 10:10:26');
 
 -- ----------------------------
 -- Table structure for post
@@ -508,7 +565,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2021-12-29 16:12:02.053561', '2022-01-06 13:42:55.000000', 'admin', 'admin', '', 1, 'admin', 'admin', '00', '87789771@qq.com', '13006133172', '0', '', '9c68fb331431f8dcfb7defef22b0c527', 'Y2uPc7hyq8Vi5qBc879Ut', '0', '0', '', NULL, 1);
+INSERT INTO `user` VALUES ('2021-12-29 16:12:02.053561', '2022-07-14 11:02:25.000000', 'admin', 'admin', '', 1, 'admin', 'admin', '00', 'xxx@gmail.com', '13711111111', '0', '/upload/2022-07-14/1657767745022-475707981-blob.jpg', '8288f3a4b625d51a042843e83f0363da', 'Y2uPc7hyq8Vi5qBc879Ut', '0', '0', '', NULL, 1);
 
 -- ----------------------------
 -- Table structure for user_posts_post
@@ -547,5 +604,50 @@ CREATE TABLE `user_roles_role`  (
 -- Records of user_roles_role
 -- ----------------------------
 INSERT INTO `user_roles_role` VALUES (1, 1);
+
+-- ----------------------------
+-- Table structure for web_news
+-- ----------------------------
+DROP TABLE IF EXISTS `web_news`;
+CREATE TABLE `web_news`  (
+  `create_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
+  `update_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
+  `create_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创建人',
+  `update_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '更新人',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
+  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'name',
+  `link` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'link',
+  `image` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'image',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of web_news
+-- ----------------------------
+INSERT INTO `web_news` VALUES ('2022-07-13 16:29:19.818381', '2022-07-13 16:29:19.818381', 'admin', 'admin', '', 9, '1', '23', '/upload/2022-07-13/1657700959441-357190179-logo.png');
+
+-- ----------------------------
+-- Table structure for web_user
+-- ----------------------------
+DROP TABLE IF EXISTS `web_user`;
+CREATE TABLE `web_user`  (
+  `create_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
+  `update_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
+  `create_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创建人',
+  `update_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '更新人',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
+  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'name',
+  `introduction` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'introduction',
+  `article` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'article',
+  `image` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'image',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of web_user
+-- ----------------------------
+INSERT INTO `web_user` VALUES ('2022-07-13 15:48:44.257053', '2022-07-13 15:51:56.000000', 'admin', 'admin', '', 6, '1', '2', '30', '/upload/2022-07-13/1657698523121-142393804-default.png');
 
 SET FOREIGN_KEY_CHECKS = 1;
