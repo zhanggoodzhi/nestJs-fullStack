@@ -19,7 +19,7 @@ export default defineConfig({
     host: process.env.MYSQL_HOST || '106.52.138.224',
     port: process.env.MYSQL_PORT || 3306,
     username: process.env.MYSQL_USERNAME || 'web3goofficial',
-    password: process.env.MYSQL_PASSWORD || 'web3goofficial123',
+    password: process.env.MYSQL_PASSWORD || 'web3goofficial',
     database: process.env.MYSQL_DATABASE || 'dev_web3go_official_website',
     autoLoadModels: true,
     synchronize: true,
